@@ -1,6 +1,7 @@
 from BASE.base_class import Base
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+
 from selenium.webdriver.support.wait import WebDriverWait
 import time
 
@@ -10,33 +11,22 @@ class MainPage(Base):
         super().__init__(driver)
         self.driver = driver
 
-    start_agree_button = "//button[@data-testid='agreementBtn']"
-    start_catalog_button = "/html/body/div[5]/div[1]/header/div/div[5]/div/button/span"
+    account_button = (By.XPATH, '//span[@class="userToolsText"]')
+    enter_to_account_button_from_main_page = (By.XPATH, '//button[@data-testid="loginButton"]')
+    enter_to_account_button = (By.XPATH, '//button[@class="styles_reactButton__2olKd style_baseActionButton__2LQYJ '
+                                         'styles_submitButton__lmwVK""]')
+    email_field = (By.XPATH, '//input[@label="Электронная почта"]')
+    password_field = (By.XPATH, '//input[@label="Пароль"]')
     smartphone_and_tv_category_button = "//a[@href='/electronics/']"
     smartphones_apple_category_button = "//a[@href='/mobile/apple/']"
 
-    """GETTERS"""
+    """Find elements on page"""
+    def enter_to_account(self, email, password):
+        time.sleep(2)
+        self.verify_element_present(self.account_button).click()
+        self.verify_element_present(self.enter_to_account_button_from_main_page).click()
+        self.verify_element_present(self.email_field).send_keys(email)
+        self.verify_element_present(self.password_field).send_keys(password)
+        self.verify_element_present(self.enter_to_account_button).click()
 
-    def get_agree_button(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.start_agree_button)))
 
-    def get_catalog(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.start_catalog_button)))
-
-    def get_smartphone_and_tv_category(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH,
-                                                                                self.smartphone_and_tv_category_button)))
-
-    def get_smartphones_apple_category(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH,
-                                                                                self.smartphones_apple_category_button)))
-
-    """ACTIONS"""
-
-    def click_to_agree_button(self):
-        self.get_agree_button().click()
-        print("CLICK TO AGREE BUTTON")
-
-    def click_to_catalog_button(self):
-        self.get_catalog().click()
-        print("SELECT THE CATALOG")
