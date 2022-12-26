@@ -1,8 +1,7 @@
-
 from PAGES.main_page import MainPage
-from conftest import driver
+from conftest import brows
 
 
-def test_login_page(driver):
-    ac = MainPage(driver=driver)
-    ac.enter_to_account(email='alexanlevkin@gmail.com', password='85d8ce47')
+def kdf(brows):
+    fg = MainPage
+    fg.enter_to_personal_account()
