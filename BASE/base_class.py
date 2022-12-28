@@ -12,18 +12,23 @@ class Base:
         self.driver = driver
 
     """Collection of actions"""
+    def hover_on_element_emulate_human(self, locator):
+        ActionChains(self.driver).pause(0.3).move_to_element(locator).perform()
 
-    def verify_element_to_be_clickable(self, locator: tuple):
-        return WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable(locator))
+    def click_element_emulate_human(self, locator):
+        ActionChains(self.driver).pause(0.3).move_to_element(locator).click().perform()
 
-    def click_element(self, locator: tuple):
-        return self.verify_element_to_be_clickable(locator)
+    def click_and_send_value(self, locator, value):
+        ActionChains(self.driver).pause(0.3).move_to_element(locator).click().send_keys(value).perform()
 
-    def hover_on_element_emulate_human(self, element):
-        ActionChains(self.driver).pause(0.3).move_to_element(element).perform()
-
-    def click_element_emulate_human(self, element):
-        ActionChains(self.driver).pause(0.3).move_to_element(element).click().perform()
+    # def verify_element_to_be_clickable(self, locator: tuple):
+    #     return WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable(locator))
+    #
+    # def verify_element_to_be_visible(self, locator: tuple):
+    #     return WebDriverWait(self.driver, 3).until(EC.visibility_of_element_located(locator))
+    #
+    # def click_element(self, locator: tuple):
+    #     return self.verify_element_to_be_clickable(locator)
 
     """Method Get current url"""
 
