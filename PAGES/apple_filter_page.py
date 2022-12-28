@@ -7,19 +7,23 @@ import time
 
 class AppleFilterPage(Base):
     """Locators"""
+    UNDERSTAND_BUTTON = (By.XPATH, '//button[@class="styles_reactButton__2olKd styles_button__2N0fI"]')
     SMARTPHONES_APPLE_TAB = (
         By.XPATH, '//*[@id="header"]/div[1]/div[7]/div/div[2]/div[3]/div[1]/div[1]/div[1]/a[3]/span')
     WORD_APPLE_SMARTPHONES = (By.XPATH, '//h1[@class="content__header cr-category_header"]')
     COST_ITEM_FROM_FIELD = (By.XPATH, '//input[@name="filter[price][from]"]')
     COST_ITEM_TO_FIELD = (By.XPATH, '//input[@name="filter[price][to]"]')
-    IN_STOCK_CHECKBOX = (By.XPATH, '//label[@class="g-form__checklabel cr-help-place"]')
-    YEAR_FILTER = (By.XPATH, '//span[@class="g-pseudo_href j-filter__fold"]')
-    CHECKBOX_2022_YEAR_FILTER = (By.XPATH, '//label[@title="2022 г."]')
+    IN_STOCK_CHECKBOX = (By.XPATH, '//label[@title="В наличии"]')
+    YEAR_FILTER = (By.XPATH, '//*[@id="j-filter__form"]/div[4]/dl[3]/dt/span')
+    CHECKBOX_2022_YEAR_FILTER = (By.CSS_SELECTOR, '//label[@title="2022 г."]')
 
     """Getters"""
 
     def get_smartphone_apple_category(self):
         return WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable(self.SMARTPHONES_APPLE_TAB))
+
+    def get_understand_button(self):
+        return WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable(self.UNDERSTAND_BUTTON))
 
     def get_check_word_apple_smart(self):
         return WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable(self.WORD_APPLE_SMARTPHONES))
@@ -34,12 +38,16 @@ class AppleFilterPage(Base):
         return WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable(self.IN_STOCK_CHECKBOX))
 
     def get_year_filter(self):
-        return WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable(self.YEAR_FILTER))
+        return WebDriverWait(self.driver, 3).until(EC.visibility_of_element_located(self.YEAR_FILTER))
 
     def get_2022_year_checkbox(self):
         return WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable(self.CHECKBOX_2022_YEAR_FILTER))
 
     """Actions"""
+
+    def click_understand_button(self):
+        self.get_understand_button().click()
+        print("CLICK ON THE UNDERSTAND BUTTON")
 
     def click_smartphone_apple_category(self):
         self.click_element_emulate_human(self.get_smartphone_apple_category())
@@ -66,6 +74,7 @@ class AppleFilterPage(Base):
         print("CLICK YEAR 2022 CHECKBOX")
 
     def apple_filter_actions(self):
+        self.click_understand_button()
         self.click_smartphone_apple_category()
         time.sleep(1)
         self.assert_word(word=self.get_check_word_apple_smart(), result="Смартфоны Apple")
@@ -73,5 +82,6 @@ class AppleFilterPage(Base):
         self.fill_in_cost_item_to()
         self.click_on_in_stock_checkbox()
         self.move_and_click_the_year_filter()
+        time.sleep(5)
         self.click_2022_year_checkbox()
         time.sleep(1)
