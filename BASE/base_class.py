@@ -45,6 +45,10 @@ class Base:
         assert get_url == result
         print("GOOD VALUE URL")
 
+    def get_param_url(self, param: str):
+        self.driver.get(self.driver.current_url + param)
+
+
     """Method screen shot"""
 
     def get_screenshot(self):
