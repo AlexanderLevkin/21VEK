@@ -124,6 +124,7 @@ class AppleFilterPage(Base):
         self.click_element_emulate_human(locator=self.get_cart_button())
         print("TRANSFER TO CART")
 
+    """METHOD"""
     def apple_filter_actions(self):
         self.click_understand_button()
         self.click_smartphone_apple_category()

@@ -3,7 +3,7 @@ import time
 import pytest
 
 from PAGES.apple_filter_page import AppleFilterPage
-from PAGES.cart_page import CartPage
+from PAGES.cart_and_order_page import CartPage
 from PAGES.catalog_page import CatalogPage
 from PAGES.main_page import MainPage
 from conftest import brows
