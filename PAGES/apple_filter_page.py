@@ -26,9 +26,7 @@ class AppleFilterPage(Base):
     IPHONE_NAME_IN_CATALOG = (By.LINK_TEXT, 'Смартфон Apple iPhone 13 128GB MLPG3 / MLMM3 (звездный свет)')
     CART_BUTTON = (By.XPATH, '//a[@class="headerCartBox"]')
 
-
     """Getters Common"""
-
     def get_smartphone_apple_category(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.SMARTPHONES_APPLE_TAB))
 
@@ -129,6 +127,7 @@ class AppleFilterPage(Base):
     def apple_filter_actions(self):
         self.click_understand_button()
         self.click_smartphone_apple_category()
+        self.assert_url(result="https://www.21vek.by/mobile/apple/")
         time.sleep(1)
         self.assert_word(word=self.get_check_word_apple_smart(), result="Смартфоны Apple")
         # self.fill_in_cost_item_from()
