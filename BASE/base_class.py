@@ -79,4 +79,4 @@ class Base:
     def get_screenshot(self):
         now_date = datetime.datetime.utcnow().strftime("%Y.%m.%d.%H.%M.%S")
         name_screenshot = 'SHOT ' + now_date + '.png'
-        self.driver.save_screenshot('/Users/alexanderlevkin/Desktop/LESSONS/pythonProject/SCREEN' + name_screenshot)
+        self.driver.save_screenshot('/Users/alexanderlevkin/Desktop/LESSONS/pythonProject/SCREEN/' + name_screenshot)
