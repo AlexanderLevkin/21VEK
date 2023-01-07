@@ -60,10 +60,8 @@ class Base:
         print(f"GOOD VALUE WORLD: {value_word} CORRESPOND {result}")
 
     def assert_two_phrases(self, word, result):
-        value_word = word.text
-        value_word2 = result.text
-        assert value_word == value_word2
-        print(f"GOOD VALUE WORLD: {value_word} CORRESPOND {value_word2}")
+        assert word == result
+        print(f"GOOD VALUE WORLD: {word} CORRESPOND {result}")
 
     """Method assert url"""
 

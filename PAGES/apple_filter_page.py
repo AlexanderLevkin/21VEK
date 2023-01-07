@@ -146,8 +146,8 @@ class AppleFilterPage(Base):
         self.assert_url(result="https://www.21vek.by/mobile/apple/")
         time.sleep(1)
         self.assert_word(word=self.get_check_word_apple_smart(), result="Смартфоны Apple")
-        # self.fill_in_cost_item_from()
-        # self.fill_in_cost_item_to()
+        # self.fill_in_cost_item_from() - use it if you want to choose cost filter fields from and to instead slider
+        # self.fill_in_cost_item_to() - use it if you want to choose cost filter fields from and to instead slider
         self.click_hold_move_slider_from()
         self.click_hold_move_slider_to()
         self.click_on_in_stock_checkbox()
