@@ -13,26 +13,26 @@ class Base:
 
     """Collection of actions"""
 
-    def hover_on_element_emulate_human(self, locator):
+    def hover_on_element_emulate_human(self, locator):  # Hover on element emulate human behavior
         ActionChains(self.driver).pause(0.3).move_to_element(locator).perform()
 
-    def click_element_emulate_human(self, locator):
+    def click_element_emulate_human(self, locator):  # Click on element emulate human behavior with chain MOVE
         ActionChains(self.driver).pause(0.3).move_to_element(locator).click().perform()
 
-    def scroll_to_element_and_click(self, locator):
+    def scroll_to_element_and_click(self, locator):  # Scroll and lick on element emulate human behavior
         ActionChains(self.driver).pause(0.3).scroll_to_element(locator).click().perform()
 
-    def scroll_to_element(self, locator):
+    def scroll_to_element(self, locator):  # Scroll to element without any actions
         ActionChains(self.driver).pause(0.3).move_to_element(locator).perform()
 
-    def click_and_send_value(self, locator, value):
+    def click_and_send_value(self, locator, value):  # Click to field (for instance) and send some values
         ActionChains(self.driver).pause(0.3).move_to_element(locator).click().send_keys(value).perform()
 
-    def click_and_hold_slider(self, locator, x, y):
+    def click_and_hold_slider(self, locator, x, y):  # Func to use slider
         ActionChains(self.driver).move_to_element(locator).perform()
         ActionChains(self.driver).click_and_hold(locator).move_by_offset(x, y).release().perform()
 
-    def scrolling_page_to(self, x, y):
+    def scrolling_page_to(self, x, y):  # Simple scrolling page without element
         self.driver.execute_script(f"window.scrollTo({x}, {y})")
 
     """Method Get current url"""
@@ -46,6 +46,11 @@ class Base:
     def get_text(self, locator):
         text_word = locator.text
         print(f"{text_word}")
+
+    def get_text_with_replace(self, locator, what_to_replace, replaced):
+        text_word = locator.text
+        text_word_rep = float(text_word.replace(f'{what_to_replace}, {replaced}'))
+        print(f"{text_word_rep}")
 
     """Method assert words"""
 

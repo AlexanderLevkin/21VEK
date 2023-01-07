@@ -23,21 +23,26 @@ class AppleFilterPage(Base):
                             '/html/body/div[5]/div[2]/div[2]/div[2]/div[1]/form/div[4]/dl[21]/div/dd[3]/label')
     BUTTON_SHOW_GOODS = (By.XPATH, '//button[@class="filter-controls__submit filter__button g-button"]')
     IPHONE13_128_WHITE = (By.XPATH, '//form[@action="/to_basket/?item=7116374&special=0&price=2799.00"]')
+    COST_OF_IPHONE13_128_WHITE = (By.XPATH, '//span[@class="g-item-data j-item-data j-item-data7116374 '
+                                            'j-item-data-real7116374 "]')
     IPHONE_NAME_IN_CATALOG = (By.LINK_TEXT, 'Смартфон Apple iPhone 13 128GB MLPG3 / MLMM3 (звездный свет)')
     CART_BUTTON = (By.XPATH, '//a[@class="headerCartBox"]')
 
     """Getters Common"""
+
     def get_smartphone_apple_category(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.SMARTPHONES_APPLE_TAB))
 
-    def get_understand_button(self):
+    def get_understand_button(self):  # close pop-up about cookies
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.UNDERSTAND_BUTTON))
 
-    def get_check_word_apple_smart(self):
+    def get_check_word_apple_smart(self):  # get item word to compare
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.WORD_APPLE_SMARTPHONES))
 
     """Getters Operation with filter"""
-    # You can use it if you want to choose cost filter by fields from and to instead slider
+
+    # You can use it if you want to choose cost filter by fields from and to instead slider. To use it you need to
+    # disable slider getters and actions
     # def get_cost_item_field_from(self):
     #     return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.COST_ITEM_FROM_FIELD))
     #
@@ -65,12 +70,14 @@ class AppleFilterPage(Base):
     def get_iphone_13_128_white(self):
         return WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.IPHONE13_128_WHITE))
 
-    def get_iphone_name(self):
+    def get_iphone_13_128_cost(self):
+        return WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.COST_OF_IPHONE13_128_WHITE))
+
+    def get_iphone_name(self):  # Item name from filter page to compare
         return WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.IPHONE_NAME_IN_CATALOG))
 
-    def get_cart_button(self):
+    def get_cart_button(self):  # Item cost from filter page to compare
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(self.CART_BUTTON))
-
 
     """Actions"""
 
@@ -82,7 +89,8 @@ class AppleFilterPage(Base):
         self.click_element_emulate_human(self.get_smartphone_apple_category())
         print("CLICK ON THE APPLE TAB")
 
-    # You can use it if you want to choose cost filter by fields from and to instead slider
+    # You can use it if you want to choose cost filter fields from and to instead slider, now are disabled because
+    # I use slider getters and actions
     # def fill_in_cost_item_from(self):
     #     self.click_and_send_value(locator=self.get_cost_item_field_from(), value="2000")
     #     print("FILL IN THE COST FROM")
@@ -124,7 +132,14 @@ class AppleFilterPage(Base):
         self.click_element_emulate_human(locator=self.get_cart_button())
         print("TRANSFER TO CART")
 
+    def name_item_from_filter_page(self):    # Item name from filter page to compare
+        self.get_text(self.get_iphone_name())
+
+    def cost_item_from_filter_page(self):   # Item cost from filter page to compare
+        self.get_text(self.get_iphone_13_128_cost())
+
     """METHOD"""
+
     def apple_filter_actions(self):
         self.click_understand_button()
         self.click_smartphone_apple_category()
@@ -139,7 +154,8 @@ class AppleFilterPage(Base):
         self.move_and_click_color_filter()
         self.click_white_color()
         self.click_button_show_goods()
-        self.get_text(self.get_iphone_name())
+        self.name_item_from_filter_page()
+        self.cost_item_from_filter_page()
         self.add_iphone13_to_cart()
         self.transfer_to_cart()
         time.sleep(5)
