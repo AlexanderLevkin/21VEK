@@ -104,7 +104,7 @@ class AppleFilterPage(Base):
 
     def click_hold_move_slider_to(self):
         self.click_and_hold_slider(self.get_slider_to(), x=-50, y=0)
-        print(f"COST TO SLIDER")
+        print("COST TO SLIDER")
 
     def click_on_in_stock_checkbox(self):
         self.click_element_emulate_human(locator=self.get_in_cart_checkbox())

@@ -49,7 +49,7 @@ class Base:
 
     def get_text_with_replace(self, locator, what_to_replace, replaced):
         text_word = locator.text
-        text_word_rep = float(text_word.replace(f'{what_to_replace}, {replaced}'))
+        text_word_rep = text_word.replace(f'{what_to_replace}', f'{replaced}')
         print(f"{text_word_rep}")
 
     """Method assert words"""
